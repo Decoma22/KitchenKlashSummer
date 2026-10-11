@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MinigameSaute : MonoBehaviour
 {
+    //To-Do: Remove this comment, it is a test for Git Ignore.
     [SerializeField] private float rotationSpeed = 0.15f;
     [SerializeField] private float rotationSmoothness = 8f;
     float maxTiltX = 45f;
