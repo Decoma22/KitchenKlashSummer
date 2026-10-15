@@ -18,7 +18,8 @@ public class GameHandler : MonoBehaviour
         Saute,
         Chop,
         Wash,
-        Pot
+        Pot,
+        Plate
     }
     
 }

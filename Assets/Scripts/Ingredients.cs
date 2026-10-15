@@ -7,6 +7,8 @@ public class Ingredients : MonoBehaviour, IInteractable
     private Player player;
     private Transform snapPoint;
     private Rigidbody rb;
+    private BoxCollider boxc;
+    private BoxCollider BoxCollider;
     private Transform newParent;
     private Transform originParent;
    
@@ -15,31 +17,46 @@ public class Ingredients : MonoBehaviour, IInteractable
     {
         player = FindFirstObjectByType<Player>();
         rb = GetComponent<Rigidbody>();
+        boxc = GetComponent<BoxCollider>();
+        BoxCollider = GetComponent<BoxCollider>();
         originParent = transform.parent;
         newParent = player.holdPoint;
     }
 
     public void Interact()
     {
-        print("picked up");
-        HoldItem(snapPoint);
+        if (player.isHolding)
+        {
+            print("one only");
+        }
+        else
+        {
+            print("picked up");
+            HoldItem(snapPoint);
+            print(transform.position);
+        }
     }
 
     private void HoldItem(Transform snapPoint)
     {
+        transform.SetParent(newParent, false);
         snapPoint = player.holdPoint;
+        boxc.enabled = false;
         rb.useGravity = false;
         rb.isKinematic = true;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-        transform.SetParent(newParent, false);
+        
+        player.isHolding = true;
     }
 
     public void DropItem()
     {
         print("drop");
-        rb.useGravity = true;
+        boxc.enabled = true;
         rb.isKinematic = false;
+        rb.useGravity = true;
         transform.SetParent(originParent, true);
+        player.isHolding = false;
     }
 }

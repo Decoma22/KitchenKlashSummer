@@ -52,8 +52,8 @@ public class MinigameSaute : MonoBehaviour
 
                     targetRotation = targetRotation * deltaRotation;
 
-                    
 
+                print(pan.rotation);
                 lastMousePosition = Input.mousePosition;
                 }
 

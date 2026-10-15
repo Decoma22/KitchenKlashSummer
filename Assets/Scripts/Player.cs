@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     //you can SerializeField to allow something to be modifiable in editor but not public
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] public Transform holdPoint;
+    public bool isHolding = false;
     private CameraSwitch cameraSwitch;
 
     private void Start()

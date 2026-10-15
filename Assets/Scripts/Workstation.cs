@@ -10,6 +10,8 @@ public class Workstation : MonoBehaviour, IInteractable
     [SerializeField] private GameHandler.MiniType miniType;
     [SerializeField] public Transform pan;
     [SerializeField] public Transform knife;
+    [SerializeField] public Transform plate;
+    [SerializeField] public Transform ingredient;
 
     private CameraSwitch cameraSwitch;
     private Player player;
@@ -18,6 +20,7 @@ public class Workstation : MonoBehaviour, IInteractable
     public GameHandler.MiniType MiniType => miniType;
     public Transform Pan => pan;
     public Transform Knife => knife;
+    public Transform Plate => plate;
   
     //TO-DO: Just a reminder that the coroutines in here need to be removed once manager works.
   

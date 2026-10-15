@@ -9,12 +9,14 @@ public class MinigameManager : MonoBehaviour
     private CameraSwitch cameraSwitch;
     private MinigameSaute minigameSaute;
     private MinigameChop minigameChop;
+    private MinigamePlate minigamePlate;
     private Coroutine currentMinigame;
 
     private void Start()
     {
         minigameSaute = GetComponent<MinigameSaute>();
         minigameChop = GetComponent<MinigameChop>();
+        minigamePlate = GetComponent<MinigamePlate>();
     }
 
     public void Minigame_Switch(Workstation workstation)
@@ -27,9 +29,11 @@ public class MinigameManager : MonoBehaviour
                 currentMinigame = StartCoroutine(minigameSaute.Mini_Pan(workstation.pan));
                 break;
             case GameHandler.MiniType.Chop:
-                currentMinigame = StartCoroutine(minigameChop.Mini_Chop(workstation.knife));
+                currentMinigame = StartCoroutine(minigameChop.Mini_Chop(workstation.knife, workstation.ingredient));
                 break;
-           
+            case GameHandler.MiniType.Plate:
+                currentMinigame = StartCoroutine(minigamePlate.Mini_Plate(workstation.plate, workstation.ingredient));
+                break;
         }
     }
 
