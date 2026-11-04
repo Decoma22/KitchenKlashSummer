@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     //you can SerializeField to allow something to be modifiable in editor but not public
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] public Transform holdPoint;
-    public bool isHolding = false;
+    public Ingredients HeldIngredient {  get; private set; }
     private CameraSwitch cameraSwitch;
 
     private void Start()
@@ -76,4 +76,19 @@ public class Player : MonoBehaviour
         transform.position = snapPoint.position;
     }
 
+    public bool SetHeldIngredient(Ingredients ingredient)
+    {
+        if (ingredient == null) return false;
+        HeldIngredient = ingredient;
+        return true;
+    }
+
+    public void ClearHeldIngredient(Ingredients ingredient)
+    {
+        if (HeldIngredient == ingredient)
+        {
+            HeldIngredient = null;
+            print("clearheldran");
+        }
+    }
 }

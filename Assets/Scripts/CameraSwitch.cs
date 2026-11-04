@@ -11,7 +11,10 @@ public class CameraSwitch : MonoBehaviour
     public int currentIndex = 0;
     private Transform workstationParent;
     private MinigameManager minigameManager;
-    public Ingredients ingredients;
+    private Player player;
+
+    public Workstation CurrentWorkstation => currentWorkstation;
+    public Camera CurrentWorkstationCamera => currentWorkstationCamera;
 
 
     public void Start()
@@ -20,8 +23,7 @@ public class CameraSwitch : MonoBehaviour
         IsUsingWorkstationCamera = false;
         workstationParent = GameObject.Find("Workstations").transform;
         minigameManager = FindFirstObjectByType<MinigameManager>();
-        ingredients = FindFirstObjectByType<Ingredients>();
-
+        player = FindFirstObjectByType<Player>();
     }
     public void Update()
     {
@@ -30,6 +32,7 @@ public class CameraSwitch : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                //if (currentWorkstation != null) currentWorkstation.LeaveWorkstation();
                 minigameManager.StopMinigame();
                 ShowPerspectiveCamera();
             }
@@ -46,7 +49,10 @@ public class CameraSwitch : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                ingredients.DropItem();
+                if (player != null && player.HeldIngredient != null) 
+                {
+                    player.HeldIngredient.DropItem();
+                }
             }
         }
         }
@@ -65,6 +71,7 @@ public class CameraSwitch : MonoBehaviour
 
         if (workstation != null)
         {
+            //if (currentWorkstation != null) currentWorkstation.LeaveWorkstation();
             workstation.EnterWorkstation();
         }
         //TO-DO: Debug switching (double press then offness always. might swithc index handling to cameraSwitcher
@@ -83,6 +90,7 @@ public class CameraSwitch : MonoBehaviour
             IsUsingWorkstationCamera = false;
             currentWorkstationCamera = null;
         }
+        currentWorkstation = null;
         perspectiveCamera.enabled = true;
       //  Debug.LogError("Camera showing perspective");
     }

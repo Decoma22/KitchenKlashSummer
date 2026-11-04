@@ -15,15 +15,27 @@ public class Interactor : MonoBehaviour
     public Material glowMaterial;
     private Dictionary<Renderer, Material[]> originalMaterials = new Dictionary<Renderer, Material[]>();
     private List<Renderer> toClear = new List<Renderer>();
+    private CameraSwitch cameraSwitch;
+
+    private void Start()
+    {
+        cameraSwitch = FindFirstObjectByType<CameraSwitch>();
+    }
 
     private void Update()
     {
+        if (cameraSwitch != null && cameraSwitch.IsUsingWorkstationCamera)
+        {
+            RemoveGlow(null);
+            return;
+        }
+
         // print("DEBUG: E was pressed");
         GameObject glowTarget = null;
             Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
             if (Physics.Raycast(r, out RaycastHit hitinfo, InteractRange))
             {
-                if (hitinfo.collider.gameObject.TryGetComponent(out IInteractable _) && hitinfo.collider.gameObject.TryGetComponent(out Ingredients _))
+                if (hitinfo.collider.gameObject.TryGetComponent(out IInteractable _) && hitinfo.collider.gameObject.TryGetComponent(out Ingredients ingredient) && ingredient.CurrentState == Ingredients.IngredientState.World)
             {
                 glowTarget = hitinfo.collider.gameObject;
                 AddGlow(glowTarget);
