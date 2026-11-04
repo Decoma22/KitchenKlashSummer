@@ -14,6 +14,7 @@ public class MinigamePlate : MonoBehaviour
         MeshCollider = ingredient.GetComponentInChildren<MeshCollider>();
         print("plating");
         float basicY = plate.position.y + 0.5f;
+        bool hasFinished = false;
 
         while (true)
         {
@@ -42,7 +43,8 @@ public class MinigamePlate : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
-                ingredient.SetParent(plate, true);
+                if (!hasFinished) {
+                    ingredient.SetParent(plate, true);
                 Workstation workstation = plate.GetComponentInParent<Workstation>();
                 if (workstation != null)
                 {
@@ -53,6 +55,7 @@ public class MinigamePlate : MonoBehaviour
                 {
                     plate.AddComponent<Ingredients>();
                 }
+            }
             }
             yield return null;
         }

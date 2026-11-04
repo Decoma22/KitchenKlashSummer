@@ -11,7 +11,8 @@ public class Ingredients : MonoBehaviour, IInteractable
     private BoxCollider BoxCollider;
     private Transform newParent;
     private Transform originParent;
-   
+    //hard code patch for instructions TO-DO: Replace with event system
+    [SerializeField] Canvas worldSpaceCanvas;
 
     private void Start()
     {
@@ -34,13 +35,16 @@ public class Ingredients : MonoBehaviour, IInteractable
             print("picked up");
             HoldItem(snapPoint);
             print(transform.position);
+
+            //TO-DO: Replace with event system
+            worldSpaceCanvas.enabled = false;
         }
     }
 
     private void HoldItem(Transform snapPoint)
     {
+        print("picked");
         transform.SetParent(newParent, false);
-        snapPoint = player.holdPoint;
         boxc.enabled = false;
         rb.useGravity = false;
         rb.isKinematic = true;
@@ -54,8 +58,8 @@ public class Ingredients : MonoBehaviour, IInteractable
     {
         print("drop");
         boxc.enabled = true;
-        rb.isKinematic = false;
         rb.useGravity = true;
+        rb.isKinematic = false;
         transform.SetParent(originParent, true);
         player.isHolding = false;
     }

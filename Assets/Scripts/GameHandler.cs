@@ -21,5 +21,13 @@ public class GameHandler : MonoBehaviour
         Pot,
         Plate
     }
+
+    public enum InstructStep
+    {
+        Instruct01,
+        Instruct02,
+        Instruct03,
+        None
+    }
     
 }
