@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005fb52a7409e1a49a2a7e5d08f62755, type: 3}
+  m_Name: Chicken_Def
+  m_EditorClassIdentifier: 
+  displayName: 
+  tracksCook: 1
+  tracksRest: 0
+  tracksWash: 0
+  tracksChop: 0
+  suggestedCookSeconds: 20
+  goodTolerane: 0.25
+  overcookRange: 0.5
+  maxRestMultiplier: 3

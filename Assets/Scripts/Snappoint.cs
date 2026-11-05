@@ -7,11 +7,12 @@ public class Snappoint : MonoBehaviour
     [SerializeField] private Transform placePoint;
     [SerializeField] private GameObject targetMarker;
     [SerializeField] private float hoverHeight = 0.15f;
-
+    [SerializeField] private Burner burner;
     public Ingredients Occupant {  get; private set; }
     public bool IsFree => Occupant == null;
     public Transform PlacePoint => placePoint != null ? placePoint : transform;
     public Vector3 HoverPosition => PlacePoint.position + Vector3.up * hoverHeight;
+    public bool IsHeated => burner != null && burner.IsOn;
 
     private Collider[] clickColliders;
     private bool markerVisible;

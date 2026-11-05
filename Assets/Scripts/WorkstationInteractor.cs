@@ -26,7 +26,7 @@ public class WorkstationInteractor : MonoBehaviour
         Workstation workstation = cameraSwitch.CurrentWorkstation;
         Camera cam = cameraSwitch.CurrentWorkstationCamera;
         if (workstation == null || cam == null) return;
-
+        if (TryClickKnob(cam)) return;
         FindTarget(cam, out Snappoint snap, out Ingredients clicked);
 
         Ingredients hovering = workstation.GetHoveringIngredient();
@@ -44,6 +44,15 @@ public class WorkstationInteractor : MonoBehaviour
         }
     }
 
+    private bool TryClickKnob(Camera cam)
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(ray, out RaycastHit hit, maxDistance, ~0, QueryTriggerInteraction.Collide)) return false;
+        Knob knob = hit.collider.GetComponentInParent<Knob>();
+        if (knob == null) return false;
+        knob.Click();
+        return true;
+    }
     private void HandleHovering(Ingredients hovering, Snappoint snap, Ingredients clicked)
     {
         if (clicked == hovering || (snap != null && snap == hovering.CurrentSnapPoint))
